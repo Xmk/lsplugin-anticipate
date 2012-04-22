@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `prefix_anticipate` (
 	`anticipate_percent` int(3) DEFAULT '0',
 	`anticipate_title` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
 	`anticipate_text` text NOT NULL DEFAULT '',
+	`anticipate_active` tinyint(1) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`anticipate_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
