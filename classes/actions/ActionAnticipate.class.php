@@ -23,9 +23,6 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 	 * Инициализация экшена
 	 */
 	public function Init() {
-		if (!LS::Adm() and Router::GetAction()!='anticipate') {
-			Router::Location(Config::Get('path.root.web').'/');
-		}
 		/**
 		 * Получаем текущего пользователя
 		 */

@@ -20,7 +20,7 @@ Config::Set('router.page.anticipate', 'PluginAnticipate_ActionAnticipate');
 /** 
  * Настройки JS и CSS файлов
  */
-Config::Set('head.rules.anticipate', array(
+/*Config::Set('head.rules.anticipate', array(
 	'path'=>array(
 		'___path.root.web___/',
 	),
@@ -56,7 +56,7 @@ Config::Set('head.rules.anticipate', array(
 			"___path.static.skin___/js/developer-jquery.js"
 		)
 	)
-));
+));*/
 
 $config['exclude'] = array('login');
 
