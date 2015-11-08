@@ -1,0 +1,27 @@
+.modal.modal-tw {
+	top: 1%;
+	width: 400px;
+	margin-left: -200px;
+}
+
+.tw-container {
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #e0e0e0;
+	background: #fafafa;
+}
+	.tw-container.active {
+	}
+.tw-item {
+}
+.tw-percent {
+}
+.tw-actions {
+}
+.tw-title {
+}
+.tw-text {
+}
+.tw-date {
+}

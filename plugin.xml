@@ -6,18 +6,18 @@
 	</name>
 	<author>
 		<lang name="default">Chiffa</lang>
-		<lang name="russian">Чиффа</lang>
+		<lang name="russian">Chiffa</lang>
 	</author>
-	<homepage></homepage>
+	<homepage>http://ars-team.ru</homepage>
 	<version>1.0</version>
-	<settings>{chiffa}anticipate/</settings>
+	<settings>{anticipate}admin/</settings>
 	<requires>
-		<livestreet>0.5.1</livestreet>
+		<livestreet>1.0</livestreet>
 		<plugins>
 		</plugins>
 	</requires>
 	<description>
-		<lang name="default">Anticipate for Livestreet CMS</lang>
-		<lang name="russian">Anticipate для Livestreet CMS</lang>
+		<lang name="default">Anticipate pages for Livestreet CMS</lang>
+		<lang name="russian">Страницы "технического обслуживания" для Livestreet CMS</lang>
 	</description>
 </plugin>

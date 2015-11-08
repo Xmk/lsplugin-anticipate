@@ -4,7 +4,7 @@
 * @Description: Anticipate plugin for LiveStreet
 * @Version: 1.0
 * @Author: Chiffa
-* @LiveStreet Version: 0.5.1+
+* @LiveStreet Version: 1.0
 * @File Name: ActionAnticipate.class.php
 * @License: CC BY-NC, http://creativecommons.org/licenses/by-nc/3.0/
 *----------------------------------------------------------------------------
@@ -28,21 +28,6 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 		 */
 		$this->oUserCurrent=$this->User_GetUserCurrent();
 		/**
-		 * Подключаем CSS
-		 */
-		$this->Viewer_AppendStyle($this->getTemplatePathPlugin().'css/anticipate.css');
-		/**
-		 * Подключаем JS
-		 */
-		$this->Viewer_AppendScript($this->getTemplatePathPlugin().'js/jquery.countdown.min.js');
-		$this->Viewer_AppendScript($this->getTemplatePathPlugin().'js/ls.anticipate.js');
-		/**
-		 * Подключаем toolbar
-		 */
-		if (!$this->oUserCurrent) {
-			$this->Viewer_AddBlock('toolbar',$this->getTemplatePathPlugin().'toolbar_login.tpl');
-		}
-		/**
 		 * Устанавливаем дефолтный эвент
 		 */
 		$this->SetDefaultEvent('index');
@@ -54,30 +39,30 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 	 */
 	protected function RegisterEvent() {
 		$this->AddEvent('admin','EventAdmin');
-		$this->AddEvent('index','EventIndex');
+		$this->AddEventPreg('/^(\d+)$/i','EventShow');
 	}
 
-
 	/**
-	 * Главная страница
+	 * Страница тех.работ
 	 *
 	 */
-	public function EventIndex() {
-		$iPercent = Config::Get('plugin.anticipate.params.percent');
-		$sTitle = Config::Get('plugin.anticipate.params.title');
-		$sText = Config::Get('plugin.anticipate.params.text');
-		$sDate = Config::Get('plugin.anticipate.params.date');
+	public function EventShow() {
+		$sTwId = $this->sCurrentEvent;
+		if (!$oTw = $this->PluginAnticipate_Tw_GetTwById($sTwId)) {
+			return parent::EventNotFound();
+		}
 		/**
 		 * Загружаем в шаблон необходимые переменные
 		 */
-		$this->Viewer_Assign('iPercent',$iPercent);
-		$this->Viewer_Assign('sTitle',$sTitle);
-		$this->Viewer_Assign('sText',$sText);
-		$this->Viewer_Assign('sDate',$sDate);
+		$this->Viewer_Assign('oTw',$oTw);
+		/**
+		 * Устанавливаем заголовок
+		 */
+		$this->Viewer_AddHtmlTitle($oTw->getTitle());
 		/**
 		 * Устанавливаем шаблон вывода
 		 */
-		$this->SetTemplateAction('index');
+		$this->SetTemplateAction('show');
 	}
 
 	/**
@@ -85,25 +70,106 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 	 *
 	 */
 	public function EventAdmin() {
-		if (!LS::Adm()) return parent::EventNotFound();
+		if (!LS::Adm()) {
+			return parent::EventNotFound();
+		}
 
-		/**
-		 * Устанавливаем шаблон вывода
-		 */
-		$this->SetTemplateAction('admin');
+		switch(getRequestStr('action')) {
+			// Создание нового tw
+			case 'add':
+				// Обрабатываем как ajax запрос (json)
+				$this->Viewer_SetResponseAjax('json');
+				$sDateStart=getRequestStr('date_start');
+				if (func_check($sDateStart,'text',6,10) && substr_count($sDateStart,'.')==2) {
+					list($d,$m,$y)=explode('.', $sDateStart);
+					$sDateStart="{$y}-{$m}-{$d}";
+				}
+				$sDateEnd=getRequestStr('date_end');
+				if (func_check($sDateEnd,'text',6,10) && substr_count($sDateEnd,'.')==2) {
+					list($d,$m,$y)=explode('.',getRequestStr('date_end'));
+					$sDateEnd="{$y}-{$m}-{$d}";
+				}
+				$oTwNew = Engine::GetEntity('PluginAnticipate_Tw_Tw');
+				$oTwNew->setTitle(getRequestStr('title'));
+				$oTwNew->setText(getRequestStr('text'));
+				$oTwNew->setDateStart($sDateStart);
+				$oTwNew->setDateEnd($sDateEnd);
+				$oTwNew->setInclude(getRequestStr('include'));
+				$oTwNew->setExclude(getRequestStr('exclude'));
+				if(!$oTwNew->_Validate()) {
+					$this->Message_AddError($oTwNew->_getValidateError(),$this->Lang_Get('error'));
+					return false;
+				}
+				if(!$oTw = $this->PluginAnticipate_Tw_AddTw($oTwNew)) {
+					$this->Message_AddError($this->Lang_Get('system_error'),$this->Lang_Get('error'));
+					return;
+				}
+				// Прогружаем переменные в ajax ответ
+				$oViewer = $this->Viewer_GetLocalViewer();
+				$oViewer->Assign('oTw',$oTw);
+				$this->Viewer_AssignAjax('sHtml',$sTextResult=$oViewer->Fetch(Plugin::GetTemplatePath(__CLASS__).'actions/ActionAnticipate/admin_item.tpl'));
+				$this->Message_AddNotice($this->Lang_Get('plugin.anticipate.add_success'));
+				break;
+			// Удаление tw
+			case 'delete':
+				// Обрабатываем как ajax запрос (json)
+				$this->Viewer_SetResponseAjax('json');
+				if (!$oTw=$this->PluginAnticipate_Tw_GetTwById(getRequestStr('id'))) {
+					$this->Message_AddError($this->Lang_Get('system_error'),$this->Lang_Get('error'));
+					return;
+				}
+				$this->PluginAnticipate_Tw_DeleteTw($oTw);
+				$this->Message_AddNotice($this->Lang_Get('plugin.anticipate.delete_success'),$this->Lang_Get('attention'));
+				break;
+			// Изменение категории
+			case 'edit':
+				// Обрабатываем как ajax запрос (json)
+				$this->Viewer_SetResponseAjax('json');
+				if (!$oTw=$this->PluginAnticipate_Tw_GetTwById(getRequestStr('id'))) {
+					$this->Message_AddError($this->Lang_Get('system_error'),$this->Lang_Get('error'));
+					return;
+				}
+				list($d,$m,$y)=explode('.',getRequestStr('date_start'));
+				$sDateStart="{$y}-{$m}-{$d}";
+				list($d,$m,$y)=explode('.',getRequestStr('date_end'));
+				$sDateEnd="{$y}-{$m}-{$d}";
+				$oTw->setTitle(getRequestStr('title'));
+				$oTw->setText(getRequestStr('text'));
+				$oTw->setDateStart($sDateStart);
+				$oTw->setDateEnd($sDateEnd);
+				$oTw->setInclude(getRequestStr('include'));
+				$oTw->setExclude(getRequestStr('exclude'));
+				if(!$oTw->_Validate()) {
+					$this->Message_AddError($oTw->_getValidateError(),$this->Lang_Get('error'));
+					return false;
+				}
+				if (!$this->PluginAnticipate_Tw_UpdateTw($oTw)) {
+					$this->Message_AddError($this->Lang_Get('system_error'),$this->Lang_Get('error'));
+					return;
+				}
+				$oViewer = $this->Viewer_GetLocalViewer();
+				$oViewer->Assign('oTw',$oTw);
+				$this->Viewer_AssignAjax('sHtml',$sTextResult=$oViewer->Fetch(Plugin::GetTemplatePath(__CLASS__).'actions/ActionAnticipate/admin_item.tpl'));
+				$this->Message_AddNotice($this->Lang_Get('plugin.anticipate.edit_success'),$this->Lang_Get('attention'));
+				break;
+			/**
+			 * Показываем страницу со списком полей
+			 */
+			default:
+				$this->sMenuItemSelect='admin';
+				// Загружаем в шаблон JS текстовки
+				$this->Lang_AddLangJs(array('plugin.anticipate.delete_confirm'));
+				// Подключаем CSS
+				$this->Viewer_AppendStyle(Plugin::GetTemplatePath(__CLASS__).'css/admin.css');
+				// Подключаем JS
+				$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__).'js/admin.js');
+				// Получаем список всего
+				$this->Viewer_Assign('aTw',$this->PluginAnticipate_Tw_GetTwItemsAll());
+				$this->Viewer_AddHtmlTitle($this->Lang_Get('plugin.anticipate.admin_title'));
+				$this->SetTemplateAction('admin');
+		}
 	}
 
-
-	/**
-	 * Завершение работы экшена
-	 */
-	public function EventShutdown() {
-		/**
-		 * Загружаем в шаблон необходимые переменные
-		 */
-		$this->Viewer_Assign('sTemplatePathPlugin',rtrim($this->getTemplatePathPlugin(),'/'));
-		$this->Viewer_Assign('sTemplateWebPath',rtrim(Plugin::GetTemplateWebPath(__CLASS__),'/'));
-	}
 }
 
 ?>

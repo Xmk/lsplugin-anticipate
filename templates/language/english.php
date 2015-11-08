@@ -14,6 +14,8 @@
  * English language file for plugin "Anticipate" 
  */
 return array(
+	'anticipate_admin' => 'Admin Control Panel',
+	'anticipate_form_submit' => 'Save',
 );
 
 ?>

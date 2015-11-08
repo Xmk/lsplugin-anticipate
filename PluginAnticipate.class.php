@@ -21,7 +21,7 @@ class PluginAnticipate extends Plugin {
 	 * Активация плагина
 	 */
 	public function Activate() {
-		if (!$this->isTableExists('prefix_anticipate')) {
+		if (!$this->isTableExists('prefix_tw')) {
 			$this->ExportSQL(dirname(__FILE__).'/sql/install.sql');
 		}
 		return true;
@@ -39,6 +39,9 @@ class PluginAnticipate extends Plugin {
 	 * Инициализация плагина
 	 */
 	public function Init() {
+		$this->Viewer_Assign('sTemplatePathAnticipate', rtrim(Plugin::GetTemplatePath(__CLASS__),'/'));
+		$this->Viewer_Assign('sTemplatePathAnticipateWeb', rtrim(Plugin::GetTemplateWebPath(__CLASS__),'/'));
+
 		return true;
 	}
 }

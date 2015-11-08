@@ -1,0 +1,33 @@
+body { background: #e6e6e6; height: 100vh; }
+
+#anticipate-header {}
+#anticipate-header .site-name { margin-top: 0; margin-bottom: 10px; }
+#anticipate-header .site-description { width: auto; font-size: 24px; margin-top: 0px; margin-bottom: 20px; }
+
+#anticipate-top-shadow { background: url(../img/top-shadow.png) repeat-x; height: 100%; }
+#anticipate-highlight { background: url(../img/highlight.png) no-repeat center top; height: 100%; }
+
+#anticipate-container { text-align: left; margin: 0 auto; width: 730px; position: relative; padding-top: 5%; }
+
+#anticipate-content { text-align: center; }
+
+#anticipate-timer { display: block; margin-bottom: 27px }
+	#anticipate-timer > span.timer { font-size: 27px; color: #cfcfcf; text-shadow: 1px 1px 1px #fff; padding-right: 16px }
+		#anticipate-timer > span.timer strong { font-weight: bold; color: #bababa }
+	#anticipate-timer > span.timer { font-family: Georgia, serif; text-transform: lowercase }
+		#anticipate-timer>span.timer strong { font-family: Helvetica, Arial, sans-serif }
+
+#anticipate-textrow { position: relative; background: #fdfdfd; background: -moz-linear-gradient(top, #fdfdfd 0%, #f6f8f9 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfdfd), color-stop(100%,#f6f8f9)); background: -webkit-linear-gradient(top, #fdfdfd 0%,#f6f8f9 100%); background: -o-linear-gradient(top, #fdfdfd 0%,#f6f8f9 100%); background: -ms-linear-gradient(top, #fdfdfd 0%,#f6f8f9 100%); background: linear-gradient(top, #fdfdfd 0%,#f6f8f9 100%); width: 725px; margin: 0 auto 12px; padding-top: 20px; border: 1px solid #e0e0e0; border-radius: 30px; -moz-border-radius: 30px; box-shadow: 0 5px 5px #888; }
+	#anticipate-textrow h2 { padding-bottom: 5px; font-size: 35px; color: #008ce3; letter-spacing: -1px; line-height: 1em; font-weight: normal; margin: 0; }
+	#anticipate-textrow .anticipate-text { padding-left: 70px; padding-right: 70px; padding-bottom: 15px; }
+	#anticipate-textrow .anticipate-quote { background: url(../img/quote-top.png) no-repeat left top; margin-left: -50px; padding-left: 50px }
+	#anticipate-textrow .anticipate-quote-bottom { background: url(../img/quote-bottom.png) no-repeat right 92%; margin-right: -40px; padding-right: 40px }
+
+#anticipate-progress-bar { position: relative; height: 62px; padding-left: 8px; padding-top: 9px; background: url(../img/black-bg.png) no-repeat 7px 9px; width: 729px; margin: 0 auto 24px }
+#anticipate-bar { background: url(../img/blue-bg.png) no-repeat; height: 44px; width: 0px }
+#anticipate-overlay { position: absolute; top: 0px; left: 0px; background: url(../img/progress-bar.png) no-repeat; width: 729px; height: 71px }
+
+#anticipate-piece { position: absolute; top: 10px; left: 0px; background: url(../img/percent-bar-torn-piece.png) no-repeat; width: 17px; height: 44px; display: none }
+#anticipate-percent-text { color: #fff; color: rgba(255, 255, 255, 0.78); font-family: Helvetica,Arial,sans-serif; font-size: 34px; left: 25px; position: absolute; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); top: 8px; display: none }
+
+#anticipate-footer {}

@@ -1,24 +1,20 @@
 <?php
 /*---------------------------------------------------------------------------
 * @Module Name: Anticipate
-* @Description: Anticipate plugin for LiveStreet CMS
 * @Version: 1.0
-* @Author: Chiffa
+* @Author: Chiffa (http://ars-team.ru/
 * @LiveStreet Version: 1.0
-* @File Name: config.php
+* @File Name: Tw.class.php
 * @License: CC BY-NC, http://creativecommons.org/licenses/by-nc/3.0/
 *----------------------------------------------------------------------------
 */
 
-$config=array();
-
-$config['theme']	= 'elegant';		// Тема
-
-/**
- * Настройки роутера
- */
-Config::Set('router.page.anticipate', 'PluginAnticipate_ActionAnticipate');
-
-return $config;
-
+class PluginAnticipate_ModuleTw extends ModuleORM {
+	/**
+	 * Инициализация модуля
+	 */
+	public function Init() {
+		parent::Init();
+	}
+}
 ?>

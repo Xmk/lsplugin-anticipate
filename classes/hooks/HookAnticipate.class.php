@@ -17,22 +17,40 @@
 class PluginAnticipate_HookAnticipate extends Hook {
 	public function RegisterHook() {
 		$this->AddHook('init_action', 'InitAction');
+	//	$this->AddHook('viewer_init_start', 'ViewerInitStart');
 	}
 
-	public function InitAction() {
+	protected function checkPage($sPages='*',$sType='include') {
 		if (LS::Adm()) {
 			return false;
 		}
-		/**
-		 * Смотрим, подходит ли текущая страница под список исключений
-		 */
-		foreach((array)Config::Get('plugin.anticipate.exclude') as $sPath) {
+		if (!in_array($sType,array('include','exclude')) || !$sPages) {
+			return false;
+		}
+		if ($sPages=='*' && $sType=='include') {
+			return true;
+		}
+		$aPages=explode(',', $sPages);
+		foreach($aPages as $sPath) {
 			$sPattern = "~".str_replace(array('/','*'),array('\/','\w+'), $sPath)."~";
 			if (preg_match($sPattern, Router::GetPathWebCurrent())) {
-				return;
+				return true;
 			}
 		}
-		Router::Action('anticipate');
+		return false;
+	}
+
+	public function InitAction() {
+		$sCurrentDate = date('Y-m-d 00:00:00');
+		if ($oTw = $this->PluginAnticipate_Tw_GetTwByTwDateStartLteAndTwDateEndGt($sCurrentDate,$sCurrentDate)) {
+			if ($this->checkPage($oTw->getExclude(),'exclude')) {
+				return false;
+			}
+			if (!$this->checkPage($oTw->getInclude(),'include')) {
+				return false;
+			}
+			Router::Action('anticipate',$oTw->getId());
+		}
 	}
 }
 

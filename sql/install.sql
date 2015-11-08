@@ -2,15 +2,16 @@
 -- Table structure for table `prefix_anticipate`
 --
 
-CREATE TABLE IF NOT EXISTS `prefix_anticipate` (
-	`anticipate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-	`anticipate_date_start` datetime NOT NULL,
-	`anticipate_date_end` datetime NOT NULL,
-	`anticipate_percent` int(3) DEFAULT '0',
-	`anticipate_title` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
-	`anticipate_text` text NOT NULL DEFAULT '',
-	`anticipate_active` tinyint(1) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`anticipate_id`)
+CREATE TABLE IF NOT EXISTS `prefix_tw` (
+	`tw_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	`tw_date_start` datetime NOT NULL,
+	`tw_date_end` datetime NOT NULL,
+	`tw_title` varchar(255) NOT NULL DEFAULT '',
+	`tw_text` text NOT NULL DEFAULT '',
+	`tw_include` varchar(255) NOT NULL DEFAULT '*',
+	`tw_exclude` varchar(255) DEFAULT NULL,
+	PRIMARY KEY (`tw_id`),
+	KEY `tw_title` (`tw_title`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

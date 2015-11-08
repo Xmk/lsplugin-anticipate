@@ -3,7 +3,7 @@
 * @Description: Anticipate plugin for LiveStreet
 * @Version: 1.0
 * @Author: Chiffa
-* @LiveStreet Version: 0.5.1+
+* @LiveStreet Version: 1.0
 * @File Name: anticipate.js
 * @License: CC BY-NC, http://creativecommons.org/licenses/by-nc/3.0/
 *----------------------------------------------------------------------------
@@ -13,7 +13,6 @@ var ls=ls || {}
 
 ls.anticipate = (function ($) {
 	this.initTimer = function(date) {
-		//var anticipateDay = new Date();
 		var anticipateDay = new Date(date);
 		$('#anticipate-timer').countdown({
 			until: anticipateDay,
@@ -39,13 +38,47 @@ ls.anticipate = (function ($) {
 		});
 	};
 
+	this.auth = function(form) {
+		if (typeof(form)=='string') {
+			form=$('#'+form);
+		}
+		this.formLoader(form);
+		var options = {
+			type: 'POST',
+			url: DIR_WEB_ROOT +'/login/ajax-login/',
+			data: { security_ls_key: LIVESTREET_SECURITY_KEY },
+			dataType: 'json',
+			success: function(result) {
+				this.formLoader(form,true);
+				form.find('.validate-login').removeClass('has-error').find('.help-block.show').removeClass('show').addClass('hidden');
+
+				if (result.bStateError) {
+					form.find('.validate-login').addClass('has-error').find('.help-block').removeClass('hidden').addClass('show').html(result.sMsg);
+				} else {
+					if (result.sMsg) {
+						ls.msg.notice(null,result.sMsg);
+					}
+					if (result.sUrlRedirect) {
+						window.location=result.sUrlRedirect;
+					}
+				}
+			}.bind(this)
+		};
+		form.ajaxSubmit(options);
+	}
+
+	this.formLoader = function(form,bHide) {
+		if (typeof(form)=='string') {
+			form=$('#'+form);
+		}
+		form.find('input[type="text"], input[type="password"]').each(function(k,v){
+			if (bHide) {
+				$(v).removeClass('loader');
+			} else {
+				$(v).addClass('loader');
+			}
+		});
+	};
+
 	return this;
 }).call(ls.anticipate || {},jQuery);
-
-jQuery(document).ready(function($){
-	$('#window_login_form').jqm();
-
-	$('#js-toolbar-login').click(function(){
-		$('#window_login_form').jqmShow();
-	});
-});
