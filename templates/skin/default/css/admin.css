@@ -38,8 +38,8 @@
 .tw-page-exclude { margin-right: 5px; }
 
 
-.modal.modal-tw > *,
-.tw-help > * {
+.modal.modal-tw *,
+.tw-help * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
