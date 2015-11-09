@@ -79,6 +79,7 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 			case 'add':
 				// Обрабатываем как ajax запрос (json)
 				$this->Viewer_SetResponseAjax('json');
+				// приводим даты к нужному формату
 				$sDateStart=getRequestStr('date_start');
 				if (func_check($sDateStart,'text',6,10) && substr_count($sDateStart,'.')==2) {
 					list($d,$m,$y)=explode('.', $sDateStart);
@@ -89,13 +90,17 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 					list($d,$m,$y)=explode('.',getRequestStr('date_end'));
 					$sDateEnd="{$y}-{$m}-{$d}";
 				}
+				// приводим в нужный формат список разделов
+				$sInclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('include')));
+				$sExclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('exclude')));
+				// создаем объект
 				$oTwNew = Engine::GetEntity('PluginAnticipate_Tw_Tw');
 				$oTwNew->setTitle(getRequestStr('title'));
 				$oTwNew->setText(getRequestStr('text'));
 				$oTwNew->setDateStart($sDateStart);
 				$oTwNew->setDateEnd($sDateEnd);
-				$oTwNew->setInclude(getRequestStr('include'));
-				$oTwNew->setExclude(getRequestStr('exclude'));
+				$oTwNew->setInclude($sInclude);
+				$oTwNew->setExclude($sExclude);
 				if(!$oTwNew->_Validate()) {
 					$this->Message_AddError($oTwNew->_getValidateError(),$this->Lang_Get('error'));
 					return false;
@@ -129,16 +134,27 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 					$this->Message_AddError($this->Lang_Get('system_error'),$this->Lang_Get('error'));
 					return;
 				}
-				list($d,$m,$y)=explode('.',getRequestStr('date_start'));
-				$sDateStart="{$y}-{$m}-{$d}";
-				list($d,$m,$y)=explode('.',getRequestStr('date_end'));
-				$sDateEnd="{$y}-{$m}-{$d}";
+				// приводим даты к нужному формату
+				$sDateStart=getRequestStr('date_start');
+				if (func_check($sDateStart,'text',6,10) && substr_count($sDateStart,'.')==2) {
+					list($d,$m,$y)=explode('.', $sDateStart);
+					$sDateStart="{$y}-{$m}-{$d}";
+				}
+				$sDateEnd=getRequestStr('date_end');
+				if (func_check($sDateEnd,'text',6,10) && substr_count($sDateEnd,'.')==2) {
+					list($d,$m,$y)=explode('.',getRequestStr('date_end'));
+					$sDateEnd="{$y}-{$m}-{$d}";
+				}
+				// приводим в нужный формат список разделов
+				$sInclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('include')));
+				$sExclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('exclude')));
+				// обновляем данные объекта
 				$oTw->setTitle(getRequestStr('title'));
 				$oTw->setText(getRequestStr('text'));
 				$oTw->setDateStart($sDateStart);
 				$oTw->setDateEnd($sDateEnd);
-				$oTw->setInclude(getRequestStr('include'));
-				$oTw->setExclude(getRequestStr('exclude'));
+				$oTw->setInclude($sInclude);
+				$oTw->setExclude($sExclude);
 				if(!$oTw->_Validate()) {
 					$this->Message_AddError($oTw->_getValidateError(),$this->Lang_Get('error'));
 					return false;

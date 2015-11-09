@@ -1,27 +1,40 @@
-.modal.modal-tw {
-	top: 1%;
-	width: 400px;
-	margin-left: -200px;
-}
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
-.tw-container {
-	margin-top: 10px;
-	padding: 10px;
-	border-radius: 5px;
-	border: 1px solid #e0e0e0;
-	background: #fafafa;
-}
-	.tw-container.active {
-	}
-.tw-item {
-}
-.tw-percent {
-}
-.tw-actions {
-}
-.tw-title {
-}
-.tw-text {
-}
-.tw-date {
-}
+.modal.modal-tw { top: 1%; width: 420px; margin-left: -210px; }
+.modal.modal-tw .modal-content { padding: 15px; }
+.modal.modal-tw .modal-header { padding: 5px 15px 0; }
+.modal.modal-tw .close { top: 13px; right: 15px; }
+
+.tw-input-form { margin-bottom: 10px; }
+	.tw-input-form small.note { font-size: 0.8em; }
+.tw-input-cols { margin-right: -5px; margin-left: -5px; zoom: 1; }
+.tw-input-cols:before, .tw-input-cols:after { content: " "; display: table; }
+.tw-input-cols:after { clear: both; }
+.tw-input-cols .tw-input-col { position: relative; float: left; width: 50%; padding-right: 5px; padding-left: 5px; }
+
+.tw-help { padding: 15px; background-color: #d9edf7; margin-bottom: 10px; border-radius: 5px; }
+.tw-help ul.inline li { display: inline-block; margin-right: 5px; }
+.tw-help ul.inline li:last-child { margin-right: 0 }
+.tw-help ul li .highlight { display: inline-block; padding: 5px; background-color: rgba(0,0,0,0.05); border-radius: 3px; }
+.tw-help>ul { }
+	.tw-help>ul>li { padding-bottom: 10px; font-size: 14px; }
+		.tw-help>ul>li>ul { margin-top: 5px; margin-left: 30px; }
+			.tw-help>ul>li>ul>li { margin-bottom: 2px; font-size: 13px; color: #333;}
+.tw-help h4 { font-size: 24px; margin-bottom: 10px; font-weight: bold; }
+.tw-help code { background: #fcfcfc; font-family: Menlo, Monaco, Consolas, monospace; border-radius: 3px; padding: 1px 5px; }
+
+.tw-container { margin-top: 10px; }
+	.tw-container.active .tw-item { background-color: #dff0d8; }
+.tw-item { padding: 10px; border-radius: 5px; border: 1px solid #e0e0e0; background-color: #fafafa; zoom: 1; }
+.tw-item:before, .tw-item:after { content: ""; display: table; }
+.tw-item:after { clear: both; }
+.tw-right { float: right; margin-top: 30px; }
+.tw-percent { margin-bottom: 20px; }
+	.tw-percent span { font-size: 32px; color: #93ab89; }
+.tw-actions { text-align: center; }
+.tw-title { font-size: 18px; margin-bottom: 10px; }
+.tw-text { color: #9CA897; margin-bottom: 10px; }
+.tw-date { color: #777; margin-bottom: 5px; }
+.tw-page { color: #333; }
+.tw-page-include { margin-right: 5px; }
+.tw-page-exclude { margin-right: 5px; }

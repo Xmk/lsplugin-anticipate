@@ -16,10 +16,11 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 	 */
 	public function Init() {
 		parent::Init();
-		$this->aValidateRules[]=array('title','string','min'=>0,'max'=>200,'allowEmpty'=>true);
-		$this->aValidateRules[]=array('text','string','min'=>0,'max'=>1500,'allowEmpty'=>true);
-		$this->aValidateRules[]=array('date_start','date','format'=>'yyyy-MM-dd');
-		$this->aValidateRules[]=array('date_end','date','format'=>'yyyy-MM-dd');
+		$this->aValidateRules[]=array('title','string','min'=>0,'max'=>200,'allowEmpty'=>true,'label'=>$this->Lang_Get('plugin.anticipate.form_title'));
+		$this->aValidateRules[]=array('text','string','min'=>0,'max'=>1500,'allowEmpty'=>true,'label'=>$this->Lang_Get('plugin.anticipate.form_text'));
+		$this->aValidateRules[]=array('date_start','date','format'=>'yyyy-MM-dd','label'=>$this->Lang_Get('plugin.anticipate.form_date_start'));
+		$this->aValidateRules[]=array('date_end','date','format'=>'yyyy-MM-dd','label'=>$this->Lang_Get('plugin.anticipate.form_date_end'));
+		$this->aValidateRules[]=array('include','string','min'=>1,'max'=>200,'allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_include'));
 		$this->aValidateRules[]=array('include','check_page','*'=>true);
 		$this->aValidateRules[]=array('exclude','check_page',);
 	}
@@ -32,8 +33,14 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 		$aValuePages = explode(',', $sValue);
 		$aRouterPages = array_keys(Config::Get('router.page'));
 		foreach ($aValuePages as $sPage) {
-			if (!in_array(trim($sPage),$aRouterPages)) {
-				return $this->Lang_Get('plugin.anticipate.form_error_router',array('url'=>trim($sPage)));
+			/**
+			 * $aPageRoute[0]		- action
+			 * $aPageRoute[1]		- event
+			 * $aPageRoute[2..n]	- param
+			 */
+			$aPageRoute=explode('/',$sPage);
+			if (!in_array(trim($aPageRoute[0]),$aRouterPages)) {
+				return $this->Lang_Get('plugin.anticipate.form_error_router',array('url'=>trim($aPageRoute[0])));
 			}
 		}
 		return true;
@@ -55,5 +62,35 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 		return round((100/$c)*$b);
 	}
 
+	public function getIncludeArray() {
+		$aResult=array();
+		$aPages=explode(',', $this->getInclude());
+		foreach ($aPages as $sPage) {
+			$sPage=trim($sPage);
+			$aPage=array(
+				'title'=>$sPage
+			);
+			if ($sPage != '*') {
+				$aPage['url']=Router::GetPath($sPage);
+			}
+			$aResult[]=$aPage;
+		}
+		return $aResult;
+	}
+	public function getExcludeArray() {
+		$aResult=array();
+		$aPages=explode(',', trim($this->getExclude()));
+		foreach ($aPages as $sPage) {
+			$sPage=trim($sPage);
+			$aPage=array(
+				'title'=>$sPage
+			);
+			if ($sPage != '*') {
+				$aPage['url']=Router::GetPath($sPage);
+			}
+			$aResult[]=$aPage;
+		}
+		return $aResult;
+	}
 }
 ?>

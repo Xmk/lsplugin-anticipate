@@ -15,7 +15,7 @@ ls.anticipate=ls.anticipate || {};
 ls.anticipate.admin = (function ($) {
 
 	this.showAddForm = function() {
-		var form = $('#tw-form');
+		var form = $('#tw_form');
 		form.find('input[name="date_start"]').val('');
 		form.find('input[name="date_end"]').val('');
 		form.find('input[name="title"]').val('');
@@ -24,18 +24,18 @@ ls.anticipate.admin = (function ($) {
 		form.find('input[name="exclude"]').val('login');
 		$('#tw_form_id').val('');
 		$('#tw_form_action').val('add');
-		$('#tw-window').jqmShow();
+		$('#tw_window').jqmShow();
 	};
 
 	this.showEditForm = function(id) {
-		var form = $('#tw-form');
+		var form = $('#tw_form');
 		var tw = $('#tw_'+id);
 		var title = tw.find('.tw-title').text(),
 			text = tw.find('.tw-text').text(),
-			date_start = tw.find('.tw-date .tw-date-start').text(),
-			date_end = tw.find('.tw-date .tw-date-end').text(),
-			include = tw.find('.tw-page .tw-page-include').text(),
-			exclude = tw.find('.tw-page .tw-page-exclude').text();
+			date_start = tw.data('date-start'),
+			date_end = tw.data('date-end'),
+			include = tw.data('include'),
+			exclude = tw.data('exclude');
 		form.find('input[name="date_start"]').val(date_start);
 		form.find('input[name="date_end"]').val(date_end);
 		form.find('input[name="title"]').val(title);
@@ -44,7 +44,7 @@ ls.anticipate.admin = (function ($) {
 		form.find('input[name="exclude"]').val(exclude);
 		$('#tw_form_id').val(id);
 		$('#tw_form_action').val('edit');
-		$('#tw-window').jqmShow();
+		$('#tw_window').jqmShow();
 	};
 
 	this.applyForm = function() {
@@ -57,21 +57,21 @@ ls.anticipate.admin = (function ($) {
 	};
 
 	this.addTw = function() {
-		var form = $('#tw-form');
+		var form = $('#tw_form');
 
 		ls.ajaxSubmit(aRouter.anticipate+'admin', form, function(result) { 
 			if (result.bStateError) {
 				ls.msg.error(null,result.sMsg);
 			} else {
 				ls.msg.notice(null,result.sMsg);
-				$('#tw-window').jqmHide();
-				$('#tw-list').append($(result.sHtml));
+				$('#tw_window').jqmHide();
+				$('#tw_list').append($(result.sHtml));
 			}
 		});
 	};
 
 	this.editTw = function() {
-		var form = $('#tw-form');
+		var form = $('#tw_form');
 		var id = $('#tw_form_id').val();
 
 		ls.ajaxSubmit(aRouter.anticipate+'admin', form, function(result) { 
@@ -79,7 +79,7 @@ ls.anticipate.admin = (function ($) {
 				ls.msg.error(null,result.sMsg);
 			} else {
 				ls.msg.notice(null,result.sMsg);
-				$('#tw-window').jqmHide();
+				$('#tw_window').jqmHide();
 				$('#tw_'+id).replaceWith(result.sHtml);
 			}
 		});
@@ -104,6 +104,6 @@ ls.anticipate.admin = (function ($) {
 }).call(ls.anticipate.admin || {},jQuery);
 
 jQuery(document).ready(function($){
-	$('#tw-window').jqm();
+	$('#tw_window').jqm();
 
 });

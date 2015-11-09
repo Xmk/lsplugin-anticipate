@@ -4,7 +4,7 @@
 * @Description: Anticipate plugin for LiveStreet
 * @Version: 1.0
 * @Author: Chiffa
-* @LiveStreet Version: 0.5.1+
+* @LiveStreet Version: 1.0
 * @File Name: HookAnticipate.class.php
 * @License: CC BY-NC, http://creativecommons.org/licenses/by-nc/3.0/
 *----------------------------------------------------------------------------
@@ -17,7 +17,6 @@
 class PluginAnticipate_HookAnticipate extends Hook {
 	public function RegisterHook() {
 		$this->AddHook('init_action', 'InitAction');
-	//	$this->AddHook('viewer_init_start', 'ViewerInitStart');
 	}
 
 	protected function checkPage($sPages='*',$sType='include') {
@@ -42,14 +41,17 @@ class PluginAnticipate_HookAnticipate extends Hook {
 
 	public function InitAction() {
 		$sCurrentDate = date('Y-m-d 00:00:00');
-		if ($oTw = $this->PluginAnticipate_Tw_GetTwByTwDateStartLteAndTwDateEndGt($sCurrentDate,$sCurrentDate)) {
-			if ($this->checkPage($oTw->getExclude(),'exclude')) {
-				return false;
+		if ($aTws = $this->PluginAnticipate_Tw_GetTwItemsByTwDateStartLteAndTwDateEndGt($sCurrentDate,$sCurrentDate)) {
+			foreach ($aTws as $oTw) {
+				if ($this->checkPage($oTw->getExclude(),'exclude')) {
+					continue;
+				}
+				if (!$this->checkPage($oTw->getInclude(),'include')) {
+					continue;
+				}
+				Router::Action('anticipate',$oTw->getId());
+				break;
 			}
-			if (!$this->checkPage($oTw->getInclude(),'include')) {
-				return false;
-			}
-			Router::Action('anticipate',$oTw->getId());
 		}
 	}
 }
