@@ -42,4 +42,7 @@
 			{/if}
 		</div>
 	</div>
+	{if !$oTw->getActive()}
+	<div class="tw-overlay"></div>
+	{/if}
 </li>
