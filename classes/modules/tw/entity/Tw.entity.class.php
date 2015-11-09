@@ -70,7 +70,7 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 			$aPage=array(
 				'title'=>$sPage
 			);
-			if ($sPage != '*') {
+			if (strpos($sPage, '*') === false) {
 				$aPage['url']=Router::GetPath($sPage);
 			}
 			$aResult[]=$aPage;
@@ -85,7 +85,7 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 			$aPage=array(
 				'title'=>$sPage
 			);
-			if ($sPage != '*') {
+			if (strpos($sPage, '*') === false) {
 				$aPage['url']=Router::GetPath($sPage);
 			}
 			$aResult[]=$aPage;

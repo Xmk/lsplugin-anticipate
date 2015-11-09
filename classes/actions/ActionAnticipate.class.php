@@ -91,8 +91,8 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 					$sDateEnd="{$y}-{$m}-{$d}";
 				}
 				// приводим в нужный формат список разделов
-				$sInclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('include')));
-				$sExclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('exclude')));
+				$sInclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('include')));
+				$sExclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('exclude')));
 				// создаем объект
 				$oTwNew = Engine::GetEntity('PluginAnticipate_Tw_Tw');
 				$oTwNew->setTitle(getRequestStr('title'));
@@ -146,8 +146,8 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 					$sDateEnd="{$y}-{$m}-{$d}";
 				}
 				// приводим в нужный формат список разделов
-				$sInclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('include')));
-				$sExclude=implode(',', preg_split('/[\s,;.:_\-\+]+/', getRequestStr('exclude')));
+				$sInclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('include')));
+				$sExclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('exclude')));
 				// обновляем данные объекта
 				$oTw->setTitle(getRequestStr('title'));
 				$oTw->setText(getRequestStr('text'));
