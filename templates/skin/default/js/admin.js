@@ -33,11 +33,19 @@ ls.anticipate.admin = (function ($) {
 		var title = tw.find('.tw-title').text(),
 			text = tw.find('.tw-text').text(),
 			date_start = tw.data('date-start'),
+			time_start = tw.data('time-start'),
 			date_end = tw.data('date-end'),
+			time_end = tw.data('time-end'),
 			include = tw.data('include'),
 			exclude = tw.data('exclude');
+		var time_start_a = time_start.split(':');
+		var time_end_a = time_end.split(':');
 		form.find('input[name="date_start"]').val(date_start);
+		form.find('select[name="time_start_h"] option[value="'+time_start_a[0]+'"]').attr('selected', 'selected');
+		form.find('select[name="time_start_m"] option[value="'+time_start_a[1]+'"]').attr('selected', 'selected');
 		form.find('input[name="date_end"]').val(date_end);
+		form.find('select[name="time_end_h"] option[value="'+time_end_a[0]+'"]').attr('selected', 'selected');
+		form.find('select[name="time_end_m"] option[value="'+time_end_a[1]+'"]').attr('selected', 'selected');
 		form.find('input[name="title"]').val(title);
 		form.find('textarea[name="text"]').val(text);
 		form.find('input[name="include"]').val(include);

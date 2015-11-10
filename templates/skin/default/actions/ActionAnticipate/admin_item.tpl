@@ -1,4 +1,4 @@
-<li id="tw_{$oTw->getId()}" class="tw-container {if $oTw->getActive()}active{/if}" data-include="{$oTw->getInclude()}" data-exclude="{$oTw->getExclude()}" data-date-start="{date_format date=$oTw->getDateStart() format='d.m.Y'}" data-date-end="{date_format date=$oTw->getDateEnd() format='d.m.Y'}">
+<li id="tw_{$oTw->getId()}" class="tw-container {if $oTw->getActive()}active{/if}" data-include="{$oTw->getInclude()}" data-exclude="{$oTw->getExclude()}" data-date-start="{date_format date=$oTw->getDateStart() format='d.m.Y'}" data-time-start="{date_format date=$oTw->getDateStart() format='H:i'}" data-date-end="{date_format date=$oTw->getDateEnd() format='d.m.Y'}" data-time-end="{date_format date=$oTw->getDateEnd() format='H:i'}">
 	<div class="tw-item">
 		<div class="tw-right">
 			<div class="tw-percent">
@@ -12,8 +12,8 @@
 		<div class="tw-title">{$oTw->getTitle()|escape:"html"}</div>
 		<div class="tw-text">{$oTw->getText()|wordwrap:50:" ":true|escape:"html"}</div>
 		<div class="tw-date">
-			<div><strong>{$aLang.plugin.anticipate.date_start}</strong>: <span class="tw-date-start">{date_format date=$oTw->getDateStart() format="j F Y"}</span></div>
-			<div><strong>{$aLang.plugin.anticipate.date_end}</strong>: <span class="tw-date-end">{date_format date=$oTw->getDateEnd() format="j F Y"}</span></div>
+			<div><strong>{$aLang.plugin.anticipate.date_start}</strong>: <span class="tw-date-start">{date_format date=$oTw->getDateStart() format="j F Y, H:i"}</span></div>
+			<div><strong>{$aLang.plugin.anticipate.date_end}</strong>: <span class="tw-date-end">{date_format date=$oTw->getDateEnd() format="j F Y, H:i"}</span></div>
 		</div>
 		<div class="tw-page">
 			{if $oTw->getInclude()}
@@ -42,7 +42,4 @@
 			{/if}
 		</div>
 	</div>
-	{if !$oTw->getActive()}
-	<div class="tw-overlay"></div>
-	{/if}
 </li>

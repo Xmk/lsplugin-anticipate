@@ -21,8 +21,43 @@
 				<input class="input-text input-width-full date-picker" readonly="readonly" type="text" name="date_start" id="tw_date_start" value="">
 			</div>
 			<div class="tw-input-col">
+				<label for="time_start_h">{$aLang.plugin.anticipate.form_time_start}</label>
+				<select class="input-width-50" name="time_start_h">
+				{section name=time_start_h start=0 loop=24 step=1}
+					{$iH = $smarty.section.time_start_h.index}
+					<option value="{if $iH < 10}0{/if}{$iH}">{if $iH < 10}0{/if}{$iH}</option>
+				{/section}
+				</select>
+				<div class="tw-select-sep">:</div>
+				<select class="input-width-50" name="time_start_m">
+				{section name=time_start_m start=0 loop=60 step=10}
+					{$iM = $smarty.section.time_start_m.index}
+					<option value="{if $iM < 10}0{/if}{$iM}">{if $iM < 10}0{/if}{$iM}</option>
+				{/section}
+				</select>
+			</div>
+		</div>
+
+		<div class="tw-input-form tw-input-cols">
+			<div class="tw-input-col">
 				<label for="tw_date_end">{$aLang.plugin.anticipate.form_date_end}</label>
 				<input class="input-text input-width-full date-picker" readonly="readonly" type="text" name="date_end" id="tw_date_end" value="">
+			</div>
+			<div class="tw-input-col">
+				<label for="time_end_h">{$aLang.plugin.anticipate.form_time_end}</label>
+				<select class="input-width-50" name="time_end_h">
+				{section name=time_end_h start=0 loop=24 step=1}
+					{$iH = $smarty.section.time_end_h.index}
+					<option value="{if $iH < 10}0{/if}{$iH}">{if $iH < 10}0{/if}{$iH}</option>
+				{/section}
+				</select>
+				<div class="tw-select-sep">:</div>
+				<select class="input-width-50" name="time_end_m">
+				{section name=time_end_m start=00 loop=60 step=10}
+					{$iM = $smarty.section.time_end_m.index}
+					<option value="{if $iM < 10}0{/if}{$iM}">{if $iM < 10}0{/if}{$iM}</option>
+				{/section}
+				</select>
 			</div>
 		</div>
 

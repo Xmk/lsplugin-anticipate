@@ -18,8 +18,8 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 		parent::Init();
 		$this->aValidateRules[]=array('title','string','min'=>3,'max'=>200,'allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_title'));
 		$this->aValidateRules[]=array('text','string','min'=>0,'max'=>1500,'allowEmpty'=>true,'label'=>$this->Lang_Get('plugin.anticipate.form_text'));
-		$this->aValidateRules[]=array('date_start','date','format'=>'yyyy-MM-dd','allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_date_start'));
-		$this->aValidateRules[]=array('date_end','date','format'=>'yyyy-MM-dd','allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_date_end'));
+		$this->aValidateRules[]=array('date_start','type'=>'datetime','datetimeFormat'=>'yyyy-MM-dd hh:mm','allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_date_start'));
+		$this->aValidateRules[]=array('date_end','type'=>'datetime','datetimeFormat'=>'yyyy-MM-dd hh:mm','allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_date_end'));
 		$this->aValidateRules[]=array('date_end','check_date');
 		$this->aValidateRules[]=array('include','string','min'=>1,'max'=>200,'allowEmpty'=>false,'label'=>$this->Lang_Get('plugin.anticipate.form_include'));
 		$this->aValidateRules[]=array('include','check_page','*'=>true);

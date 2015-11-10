@@ -83,12 +83,16 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 				$sDateStart=getRequestStr('date_start');
 				if (func_check($sDateStart,'text',6,10) && substr_count($sDateStart,'.')==2) {
 					list($d,$m,$y)=explode('.', $sDateStart);
-					$sDateStart="{$y}-{$m}-{$d}";
+					$hh=getRequestStr('time_start_h');
+					$mm=getRequestStr('time_start_m');
+					$sDateStart="{$y}-{$m}-{$d} {$hh}:{$mm}";
 				}
 				$sDateEnd=getRequestStr('date_end');
 				if (func_check($sDateEnd,'text',6,10) && substr_count($sDateEnd,'.')==2) {
 					list($d,$m,$y)=explode('.',getRequestStr('date_end'));
-					$sDateEnd="{$y}-{$m}-{$d}";
+					$hh=getRequestStr('time_end_h');
+					$mm=getRequestStr('time_end_m');
+					$sDateEnd="{$y}-{$m}-{$d} {$hh}:{$mm}";
 				}
 				// приводим в нужный формат список разделов
 				$sInclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('include')));
@@ -138,12 +142,16 @@ class PluginAnticipate_ActionAnticipate extends ActionPlugin {
 				$sDateStart=getRequestStr('date_start');
 				if (func_check($sDateStart,'text',6,10) && substr_count($sDateStart,'.')==2) {
 					list($d,$m,$y)=explode('.', $sDateStart);
-					$sDateStart="{$y}-{$m}-{$d}";
+					$hh=getRequestStr('time_start_h');
+					$mm=getRequestStr('time_start_m');
+					$sDateStart="{$y}-{$m}-{$d} {$hh}:{$mm}";
 				}
 				$sDateEnd=getRequestStr('date_end');
 				if (func_check($sDateEnd,'text',6,10) && substr_count($sDateEnd,'.')==2) {
 					list($d,$m,$y)=explode('.',getRequestStr('date_end'));
-					$sDateEnd="{$y}-{$m}-{$d}";
+					$hh=getRequestStr('time_end_h');
+					$mm=getRequestStr('time_end_m');
+					$sDateEnd="{$y}-{$m}-{$d} {$hh}:{$mm}";
 				}
 				// приводим в нужный формат список разделов
 				$sInclude=implode(',', preg_split('/[\s,;:_\-\+]+/', getRequestStr('include')));

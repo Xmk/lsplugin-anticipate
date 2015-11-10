@@ -40,7 +40,7 @@ class PluginAnticipate_HookAnticipate extends Hook {
 	}
 
 	public function InitAction() {
-		$sCurrentDate = date('Y-m-d 00:00:00');
+		$sCurrentDate = date('Y-m-d H:i:00');
 		if ($aTws = $this->PluginAnticipate_Tw_GetTwItemsByTwDateStartLteAndTwDateEndGt($sCurrentDate,$sCurrentDate)) {
 			foreach ($aTws as $oTw) {
 				if ($this->checkPage($oTw->getExclude(),'exclude')) {

@@ -20,6 +20,8 @@ return array(
 
 	'form_date_start' => 'Дата закрытия',
 	'form_date_end' => 'Дата открытия',
+	'form_time_start' => 'Время',
+	'form_time_end' => 'Время',
 	'form_title' => 'Заголовок',
 	'form_text' => 'Текст страницы (html)',
 	'form_include' => 'Подключенные страницы',
