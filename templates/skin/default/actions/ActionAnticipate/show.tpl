@@ -35,7 +35,11 @@
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/jquery.js"></script>
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/jquery.browser.js"></script>
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/jquery.form.js"></script>
-	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/jquery.countdown.min.js"></script>
+	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/jquery.plugin.min.js"></script>
+	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/countdown/jquery.countdown.min.js"></script>
+	{if $oConfig->GetValue('lang.current') == 'russian'}
+		<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/countdown/jquery.countdown-ru.js"></script>
+	{/if}
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/ls.anticipate.js"></script>
 </head>
@@ -50,7 +54,7 @@
 
 	<script type="text/javascript">
 	{if $oTw->getDateEnd()}
-		ls.anticipate.initTimer('{date_format date=$oTw->getDateEnd() format="Y-m-d"}');
+		ls.anticipate.initTimer('{date_format date=$oTw->getDateEnd() format="c"}');
 	{/if}
 	{if $oTw->getPercent()}
 		ls.anticipate.initProgressBar({$oTw->getPercent()});
