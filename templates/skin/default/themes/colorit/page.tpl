@@ -1,6 +1,6 @@
 {**
- * Тема "elegant"
- * оригинальная тема с wordpress
+ * Тема "colorit"
+ * Автор: Chiffa
  *
  * Шаблон принимает переменную $oTw, которая имеет следующие данные
  *		getTitle()			- заголовок страницы
@@ -14,56 +14,62 @@
  *}
 
 
-<div id="anticipate-top-shadow">
-	<div id="anticipate-highlight">
-		<div id="anticipate-container" class="clear_fix">
-			<div id="anticipate-content">
-				<header id="anticipate-header">
-					<hgroup class="site-info">
-						<h1 class="site-name"><a href="{cfg name='path.root.web'}">{cfg name='view.name'}</a></h1>
-						<h2 class="site-description">{cfg name='view.description'}</h2>
-					</hgroup>
-				</header>
+<div class="tw-page">
+	<div class="container">
+		<div class="tw-back">
+			<div class="jumbotron shadow-box">
+				<h1><a href="{cfg name='path.root.web'}">{cfg name='view.name'}</a></h1>
+				<p>{cfg name='view.description'}</p>
 
 				{if $oTw->getDateEnd()}
-					<div id="anticipate-timer"></div>
+					<p class="tw-timer js-countdown"></p>
 				{/if}
 
 				{if $oTw->getPercent()}
-				<div id="anticipate-progress-bar" class="clear_fix">
-					<div id="anticipate-bar"></div>
-					<div id="anticipate-piece"></div>
-					<span id="anticipate-percent-text">{$oTw->getPercent()}%</span>
-					<div id="anticipate-overlay"></div>
+				<div class="tw-progress">
+					<div class="progress shadow-box">
+						{if $oTw->getPercent() < 25}
+							{$sProgressClass = 'danger'}
+						{elseif $oTw->getPercent() < 50}
+							{$sProgressClass = 'warning'}
+						{elseif $oTw->getPercent() < 75}
+							{$sProgressClass = 'info'}
+						{else}
+							{$sProgressClass = 'success'}
+						{/if}
+						<div class="progress-bar progress-bar-{$sProgressClass} progress-bar-striped active" role="progressbar" aria-valuenow="{$oTw->getPercent()}" aria-valuemin="0" aria-valuemax="100" style="width: {$oTw->getPercent()}%">
+							{$oTw->getPercent()}%
+						</div>
+					</div>
+				</div>
+				{/if}
+
+				{if $oTw->getTitle() || $oTw->getText()}
+				<div class="tw-text shadow-box">
+					<div class="well">
+						{if $oTw->getTitle()}
+							<h2>{$oTw->getTitle()}</h2>
+						{/if}
+						{if $oTw->getText()}
+							<p>{$oTw->getText()}</p>
+						{/if}
+					</div>
 				</div>
 				{/if}
 			</div>
+		</div>
 
-			<div id="anticipate-textrow">
-				<article class="anticipate-text">
-					<div class="anticipate-quote">
-						<div class="anticipate-quote-bottom">
-							<h2>{$oTw->getTitle()}</h2>
-							{if $oTw->getText()}
-								<p>{$oTw->getText()}</p>
-							{/if}
-						</div>
-					</div>
-				</article>
+		<div class="tw-footer">
+			<div class="col-sm-6">
+				{hook run='copyright'}
 			</div>
-
-			<footer id="anticipate-footer">
-				<div class="col-sm-6">
-					{hook run='copyright'}
-				</div>
-				<div class="col-sm-6 text-right">
+			<div class="col-sm-6 text-right">
 				{if $oUserCurrent}
 					<span class="text-muted">{$oUserCurrent->getLogin()}</span>
 				{else}
 					<a href="#window_login" data-toggle="modal" data-target="#window_login">{$aLang.user_authorization}</a>
 				{/if}
-				</div>
-			</footer>
+			</div>
 		</div>
 	</div>
 </div>

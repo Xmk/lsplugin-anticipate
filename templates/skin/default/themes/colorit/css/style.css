@@ -1,0 +1,192 @@
+a {
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out
+}
+a:hover, a:focus {
+	outline: 0;
+	text-decoration: none;
+}
+
+.tw-page {
+	padding: 10px 0;
+	background-color: #570152;
+}
+	.tw-page .tw-back {
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-size: 100%;
+		border-radius: 6px;
+	}
+	.tw-page .jumbotron {
+		margin-top: 10px;
+		margin-bottom: 20px;
+		padding: 30px 20px;
+		text-align: right;
+		background-color: rgba(238, 238, 238, 0.6);
+	}
+		.tw-page .jumbotron h1 a {
+			color: #570152;
+			border-radius: 7px;
+			padding: 5px 10px;
+			margin: 0 -10px;
+		}
+		.tw-page .jumbotron h1 a:hover {
+			color: #eee;
+			background-color: #570152;
+		}
+		.tw-page .jumbotron h1+p {
+			margin-bottom: 30px;
+		}
+.tw-timer {
+	text-align: center;
+}
+	.tw-timer .timer {
+		margin: 0 5px 5px;
+		padding: 3px;
+		display: inline-block;
+		background-color: #570152;
+		border-radius: 5px;
+		color: #eee;
+		-webkit-box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+		-moz-box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+		box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+	}
+		.tw-timer .timer strong {
+			padding: 0 2px;
+			color: #570152;
+			background-color: #eee;
+			border-radius: 3px;
+		}
+.tw-progress {
+
+}
+	.tw-progress .progress {
+		height: 36px;
+	}
+		.tw-progress .progress .progress-bar {
+			font-size: 24px;
+			font-weight: 700;
+			line-height: 36px;
+			min-width: 40px;
+		}
+.tw-text {
+	text-align: center;
+}
+	.tw-text .well {
+		padding: 10px;
+	}
+	.tw-text h2 {
+		margin: 0;
+		padding: 10px;
+		margin-bottom: 20px;
+		background-color: #570152;
+		border-radius: 4px;
+		color: #eee;
+		font-size: 20px;
+	}
+	.tw-text .well p {
+		font-size: 16px;
+	}
+
+.tw-footer {
+	color: #ddd
+}
+	.tw-footer a {
+		color: #ddd;
+		padding: 2px 4px;
+		margin: 0 -2px;
+		border-radius: 3px;
+	}
+		.tw-footer a:hover {
+			color: #570152;
+			background-color: #ddd;
+		}
+
+.shadow-box {
+	-webkit-box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+	-moz-box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+	box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+}
+
+@media screen and (min-width:768px) {
+	.tw-page {
+		height: 100vh;
+	}
+	.tw-page .jumbotron {
+		padding: 30px 50px;
+	}
+	.tw-page .tw-text h2 {
+		font-size: 30px;
+	}
+
+	.tw-page.tw-back-1 .tw-back {
+		background-image: url(../img/wallpaper1.jpg);
+	}
+	.tw-page.tw-back-2 .tw-back {
+		background-image: url(../img/wallpaper2.jpg);
+	}
+	.tw-page.tw-back-3 .tw-back {
+		background-image: url(../img/wallpaper3.jpg);
+	}
+	.tw-page.tw-back-4 .tw-back {
+		background-image: url(../img/wallpaper4.jpg);
+	}
+}
+
+.tw-page.tw-color-2 .jumbotron h1 a:hover,
+.tw-page.tw-color-3 .jumbotron h1 a:hover,
+.tw-page.tw-color-4 .jumbotron h1 a:hover {
+	color: #eee;
+}
+
+/* Orange style */
+.tw-page.tw-color-2,
+.tw-page.tw-color-2 .tw-timer .timer,
+.tw-page.tw-color-2 .jumbotron h1 a:hover,
+.tw-page.tw-color-2 .tw-text h2 {
+	background-color: #f3a505;
+}
+.tw-page.tw-color-2 .jumbotron h1 a,
+.tw-page.tw-color-2 .timer strong,
+.tw-page.tw-color-2 .tw-footer a:hover {
+	color: #f3a505;
+}
+.tw-page.tw-color-2 .jumbotron {
+	*background-color: rgba(243,165,5, 0.6);
+}
+
+/* Green style */
+.tw-page.tw-color-3,
+.tw-page.tw-color-3 .tw-timer .timer,
+.tw-page.tw-color-3 .jumbotron h1 a:hover,
+.tw-page.tw-color-3 .tw-text h2 {
+	background-color: #006b3c;
+}
+.tw-page.tw-color-3 .jumbotron h1 a,
+.tw-page.tw-color-3 .timer strong,
+.tw-page.tw-color-3 .tw-footer a:hover {
+	color: #006b3c;
+}
+.tw-page.tw-color-3 .jumbotron {
+	*background-color: rgba(0,107,60, 0.6);
+}
+
+/* Blue style */
+.tw-page.tw-color-4,
+.tw-page.tw-color-4 .tw-timer .timer,
+.tw-page.tw-color-4 .jumbotron h1 a:hover,
+.tw-page.tw-color-4 .tw-text h2 {
+	background-color: #1faee9;
+}
+.tw-page.tw-color-4 .jumbotron h1 a,
+.tw-page.tw-color-4 .timer strong,
+.tw-page.tw-color-4 .tw-footer a:hover {
+	color: #1faee9;
+}
+.tw-page.tw-color-4 .jumbotron {
+	*background-color: rgba(0,107,60, 0.6);
+}
+

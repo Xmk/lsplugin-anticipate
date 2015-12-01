@@ -42,6 +42,8 @@
 	{/if}
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/js/ls.anticipate.js"></script>
+
+	<script type="text/javascript" src="{$sTemplatePathAnticipateWeb}/themes/{$sTheme}/js/theme.js"></script>
 </head>
 
 <body>

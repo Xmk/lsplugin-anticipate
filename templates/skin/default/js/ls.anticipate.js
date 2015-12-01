@@ -40,7 +40,7 @@ ls.anticipate = (function ($) {
 	};
 
 	this.refreshPage = function() {
-		windows.location.refresh;
+		window.location.reload();
 	};
 
 	this.auth = function(form) {
