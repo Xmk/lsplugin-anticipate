@@ -6,10 +6,9 @@
 	</name>
 	<author>
 		<lang name="default">Chiffa</lang>
-		<lang name="russian">Chiffa</lang>
 	</author>
 	<homepage>http://ars-team.ru</homepage>
-	<version>1.0</version>
+	<version>1.1</version>
 	<settings>{anticipate}admin/</settings>
 	<requires>
 		<livestreet>1.0</livestreet>

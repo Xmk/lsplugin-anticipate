@@ -12,7 +12,7 @@
 
 $config=array();
 
-$config['theme']	= 'elegant';		// Тема
+$config['theme']	= 'colorit';		// Тема
 
 /**
  * Настройки роутера

@@ -16,8 +16,8 @@ ls.anticipate = (function ($) {
 		var anticipateDay = new Date(date);
 		$('#anticipate-timer').countdown({
 			until: anticipateDay,
-			layout: '<span class="timer"><strong>{dn}</strong> {dl}</span><span class="timer"><strong>{hn}</strong> {hl}</span><span class="timer"><strong>{mn}</strong> {ml}</span><span class="timer"><strong>{sn}</strong> {sl}</span>',
-			onExpiry: ls.anticipate.refreshPage
+			layout: '{d<}<span class="timer"><strong>{dn}</strong> {dl}</span>{d>}{h<}<span class="timer"><strong>{hn}</strong> {hl}</span>{h>}{m<}<span class="timer"><strong>{mn}</strong> {ml}</span>{m>}<span class="timer"><strong>{sn}</strong> {sl}</span>',
+			onExpiry: ls.anticipate.refreshPage,
 		});
 	};
 
