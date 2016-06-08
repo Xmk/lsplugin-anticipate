@@ -1,4 +1,4 @@
-<?
+<?php
 /*---------------------------------------------------------------------------
 * @Module Name: Anticipate
 * @Description: Anticipate plugin for LiveStreet CMS
@@ -45,5 +45,3 @@ class PluginAnticipate extends Plugin {
 		return true;
 	}
 }
-
-?>

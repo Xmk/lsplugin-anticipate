@@ -55,5 +55,3 @@ class PluginAnticipate_HookAnticipate extends Hook {
 		}
 	}
 }
-
-?>

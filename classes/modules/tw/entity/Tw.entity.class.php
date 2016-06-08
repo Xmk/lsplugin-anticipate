@@ -102,4 +102,3 @@ class PluginAnticipate_ModuleTw_EntityTw extends EntityORM {
 		return $aResult;
 	}
 }
-?>

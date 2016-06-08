@@ -20,5 +20,3 @@ $config['theme']	= 'colorit';		// Тема
 Config::Set('router.page.anticipate', 'PluginAnticipate_ActionAnticipate');
 
 return $config;
-
-?>

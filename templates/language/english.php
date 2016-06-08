@@ -1,4 +1,4 @@
-<?
+<?php
 /*---------------------------------------------------------------------------
 * @Module Name: Anticipate
 * @Description: Anticipate plugin for LiveStreet
@@ -17,5 +17,3 @@ return array(
 	'anticipate_admin' => 'Admin Control Panel',
 	'anticipate_form_submit' => 'Save',
 );
-
-?>

@@ -17,4 +17,3 @@ class PluginAnticipate_ModuleTw extends ModuleORM {
 		parent::Init();
 	}
 }
-?>

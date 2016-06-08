@@ -1,4 +1,4 @@
-<?
+<?php
 /*---------------------------------------------------------------------------
 * @Module Name: Anticipate
 * @Description: Anticipate plugin for LiveStreet
@@ -65,5 +65,3 @@ return array(
 	),
 
 );
-
-?>
